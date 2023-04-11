@@ -22,7 +22,6 @@ class TrimmerDecorator < Decorator
   end
 
 #Capitalize Decorator Class
-
 class CapitalizeDecorator < Decorator
     def correct_name
        nameable.correct_name.capitalize
