@@ -76,8 +76,10 @@ After you're finished please remove all the comments and instructions!
 
 
 - **[Create a git flow]**
-- **[We created a class, Person]**
-- **[We created a class, teacher that inherit from Person]**
+- **[I created a class, Nameable]**
+- **[I modified a class, Person to inherit from Nameable]**
+- **[I created a class, TrimmerDecorator that inherit from Decorator]**
+- **[I created a class, CapitalizeDecorator that inherit from Decorator]**
 - **[We created a class, student that inherit from Person]**
 
 
