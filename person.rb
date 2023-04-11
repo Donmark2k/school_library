@@ -8,8 +8,9 @@ class Person < Nameable
     @name = name
     @age = age
     @parent_permission = parent_permission
+    super()
   end
-  
+
   def correct_name
     name
   end
