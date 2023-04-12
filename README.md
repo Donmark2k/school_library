@@ -76,11 +76,11 @@ After you're finished please remove all the comments and instructions!
 
 
 - **[Create a git flow]**
-- **[I created a class, Nameable]**
-- **[I modified a class, Person to inherit from Nameable]**
-- **[I created a class, TrimmerDecorator that inherit from Decorator]**
-- **[I created a class, CapitalizeDecorator that inherit from Decorator]**
-- **[We created a class, student that inherit from Person]**
+- **[I created a class, Rental]**
+- **[I created a class, Book]**
+- **[I created a class, Classroom]**
+- **[I created many-to-many  relationship between Person and Book]**
+- **[I created has-many/belongs-to relationship between Classroom and Student]**
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
