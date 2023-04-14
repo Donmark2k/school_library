@@ -30,7 +30,7 @@ After you're finished please remove all the comments and instructions!
   <img src="https://cdn.icon-icons.com/icons2/68/PNG/128/library_folder_black_13792.png" alt="logo" width="140"  height="auto" />
   <br/>
 
-  <h3><b>School Library Template</b></h3>
+  <h3><b>School Library</b></h3>
 
 </div>
 
@@ -110,7 +110,7 @@ Example command:
 
 ### Setup
 
-- Clone this repository to your desired folder: https://donmark2k.github.io/school_library.git
+- Clone this repository to your desired folder: https://github.com/Donmark2k/school_library.git
 - Run bundle install to install the dependencies.
 
 ### Install
