@@ -30,7 +30,7 @@ After you're finished please remove all the comments and instructions!
   <img src="https://cdn.icon-icons.com/icons2/68/PNG/128/library_folder_black_13792.png" alt="logo" width="140"  height="auto" />
   <br/>
 
-  <h3><b>Microverse README Template</b></h3>
+  <h3><b>School Library Template</b></h3>
 
 </div>
 
@@ -69,6 +69,7 @@ After you're finished please remove all the comments and instructions!
 - Ruby
 
 ### Tech Stack <a name="tech-stack"></a>
+- Ruby
 
 <!-- Features -->
 
@@ -83,14 +84,6 @@ After you're finished please remove all the comments and instructions!
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LIVE DEMO -->
-
-## 🚀 Live Demo <a name="live-demo"></a>
-
-<!-- > Add a link to your deployed project. -->
-
-- Live demo link will appear when ready
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
