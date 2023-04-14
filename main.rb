@@ -2,7 +2,7 @@ require_relative 'app'
 def main
     app = App.new
 
-  puts 'Welcome to School Library '
+  puts 'Welcome to School Library App '
   puts '----------------------------------'
   loop do
     puts 'Please choose an option by entering a number from 1 to 7:'
@@ -30,6 +30,6 @@ def main
     end
     break if option == 7
   end
-  puts 'Thank you for using this app!'
+  puts 'Thank you for using this app!, Have a great day'
 end
 main

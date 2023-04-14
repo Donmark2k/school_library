@@ -15,7 +15,7 @@ class App
   end
 
   def create_person
-    person_type = person_type_switch
+    person_type = person_type_option
     return if person_type.nil?
 
     print 'Name: '
@@ -43,10 +43,10 @@ class App
     puts 'Person created successfully'
   end
 
-  def person_type_switch
+  def person_type_option
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     person_type = gets.chomp
-    if person_type != '1' && person_type != '2'
+    if person_type.between?(0, 2)
       puts 'Invalid option'
       return
     end
@@ -99,15 +99,23 @@ class App
   end
 
   def list_books
-    @books.each do |book|
-      puts "Title: '#{book.title}', Author: #{book.author}"
-    end
+    if @books.empty?
+        puts "There are no books in the library"
+      else
+        @books.each do |book|
+            puts "Title: #{book.title}, Author: #{book.author}".capitalize
+        end
+      end
   end
 
   def list_people
-    @people.each do |person|
-      puts "[#{person.class}] Name: #{person.age},  Age: #{person.name}, ID: #{person.id},"
-    end
+    if @people.empty?
+        puts "There are no people in the library"
+      else
+        @people.each do |person|
+          puts "[#{person.class}] Name: #{person.age}, Age: #{person.name}, ID: #{person.id}"
+        end
+      end
   end
 
   def create_book
