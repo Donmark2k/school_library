@@ -12,8 +12,9 @@ class Person < Nameable
     super()
   end
 
-  def add_rental(rental)
-    rentals.push rental
+  def add_rental(person, date = Date.today, book = self)
+    Rental.new(date, book, person)
+    @rentals << self unless @rentals.include?(self)
   end
 
   def correct_name
