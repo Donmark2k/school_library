@@ -76,11 +76,10 @@ After you're finished please remove all the comments and instructions!
 
 
 - **[Create a git flow]**
-- **[I created a class, Rental]**
-- **[I created a class, Book]**
-- **[I created a class, Classroom]**
-- **[I created many-to-many  relationship between Person and Book]**
-- **[I created has-many/belongs-to relationship between Classroom and Student]**
+- **[I created a class, app]**
+- **[I created a method, main]**
+- **[I display the features of the app]**
+- **[I ensured that the features of the app are interactive]**
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
