@@ -119,7 +119,7 @@ class App
     if @people.empty?
       puts 'There are no people in the library'
     else
-      @people.each do |person|
+      @people.each do |persona|
         puts "[#{person.class}] Name: #{person.name}, Age: #{person.age}, ID: #{person.id}"
       end
     end
