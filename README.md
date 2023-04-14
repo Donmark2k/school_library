@@ -110,7 +110,7 @@ Example command:
 
 ### Setup
 
-- Clone this repository to your desired folder: https://donmark2k.github.io/school_library/.git
+- Clone this repository to your desired folder: https://donmark2k.github.io/school_library.git
 - Run bundle install to install the dependencies.
 
 ### Install
