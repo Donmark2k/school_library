@@ -11,5 +11,4 @@ class Book
     Rental.new(date, book, person)
     @rentals << self unless @rentals.include?(self)
   end
-  
 end

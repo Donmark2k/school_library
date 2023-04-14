@@ -15,38 +15,45 @@ class App
   end
 
   def create_person
-    person_type = person_type_option
+    person_type = person_option
     return if person_type.nil?
 
     print 'Name: '
     name = gets.chomp
     print 'Age: '
     age = gets.chomp
-    person =
-      case person_type
-      when '1'
-        print 'classroom: '
-        classroom = gets.chomp
-        print 'Has parent permission? [Y/N]: '
-        parent_permission = gets.chomp
-        parent_permission = parent_permission.downcase == 'y'
-        classroom = Classroom.new(classroom)
-        Student.new(classroom, age, name, parent_permission: parent_permission)
-      when '2'
-        print 'Specialization: '
-        specialization = gets.chomp
 
-        Teacher.new(name, specialization, age)
-      end
-
-    @people << person
-    puts 'Person created successfully'
+    case person_type
+    when '1'
+      create_student(name, age)
+    when '2'
+      create_teacher(name, age)
+    end
   end
 
-  def person_type_option
+  def create_student(name, age)
+    print 'Classroom: '
+    classroom_name = gets.chomp
+    print 'Has parent permission? [Y/N]: '
+    parent_permission = gets.chomp.downcase == 'y'
+    classroom = Classroom.new(classroom_name)
+    student = Student.new(classroom, age, name, parent_permission: parent_permission)
+    @people << student
+    puts 'Student created successfully'
+  end
+
+  def create_teacher(name, age)
+    print 'Specialization: '
+    specialization = gets.chomp
+    teacher = Teacher.new(name, specialization, age)
+    @people << teacher
+    puts 'Teacher created successfully'
+  end
+
+  def person_option
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     person_type = gets.chomp
-    if person_type.between?(0, 2)
+    if person_type != '1' && person_type != '2'
       puts 'Invalid option'
       return
     end
@@ -94,28 +101,28 @@ class App
     id = gets.chomp.to_i
     puts 'Rentals:'
     @rentals.each do |rental|
-      puts "Date: #{rental.date}, Book '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
+      puts "Date: #{rental.date}, Book Title '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
     end
   end
 
   def list_books
     if @books.empty?
-        puts "There are no books in the library"
-      else
-        @books.each do |book|
-            puts "Title: #{book.title}, Author: #{book.author}".capitalize
-        end
+      puts 'There are no books in the library'
+    else
+      @books.each do |book|
+        puts "Title: #{book.title}, Author: #{book.author}".capitalize
       end
+    end
   end
 
   def list_people
     if @people.empty?
-        puts "There are no people in the library"
-      else
-        @people.each do |person|
-          puts "[#{person.class}] Name: #{person.age}, Age: #{person.name}, ID: #{person.id}"
-        end
+      puts 'There are no people in the library'
+    else
+      @people.each do |person|
+        puts "[#{person.class}] Name: #{person.name}, Age: #{person.age}, ID: #{person.id}"
       end
+    end
   end
 
   def create_book
