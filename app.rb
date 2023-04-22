@@ -31,12 +31,7 @@ class App
     when '2'
       create_teacher(name, age)
     end
-    save= []
-    @people.each do |person|
-      save << {name:person.name, id:person.id, age:person.age}
-    end
-    save_teacher = JSON.generate(save)
-    File.write('./data/people.json', save_teacher.to_s)
+
   end
 
   def create_student(name, age)
@@ -45,16 +40,28 @@ class App
     print 'Has parent permission? [Y/N]: '
     parent_permission = gets.chomp.downcase == 'y'
     classroom = Classroom.new(classroom_name)
-    student = Student.new(classroom, age, name, parent_permission: parent_permission)
+    student = Student.new(classroom, name, age, parent_permission: parent_permission)
     @people << student
+    save= []
+    @people.each do |person|
+      save << {name:person.name, id:person.id, age:person.age}
+    end
+    save_teacher = JSON.generate(save)
+    File.write('./data/people.json', save_teacher.to_s)
     puts 'Student created successfully'
   end
 
   def create_teacher(name, age)
     print 'Specialization: '
     specialization = gets.chomp
-    teacher = Teacher.new(name, specialization, age)
+    teacher = Teacher.new(name, age, specialization )
     @people << teacher
+    save= []
+    @people.each do |person|
+      save << {id:person.id, name:person.name, age:person.age}
+    end
+    save_teacher = JSON.generate(save)
+    File.write('./data/people.json', save_teacher.to_s)
     puts 'Teacher created successfully'
   end
 
