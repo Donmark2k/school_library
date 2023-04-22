@@ -5,6 +5,8 @@ require_relative 'rental'
 require_relative 'teacher'
 require_relative 'student'
 require_relative 'classroom'
+require 'json'
+
 
 class App
   def initialize
@@ -29,6 +31,12 @@ class App
     when '2'
       create_teacher(name, age)
     end
+    save= []
+    @people.each do |person|
+      save << {name:person.name, id:person.id, age:person.age}
+    end
+    save_teacher = JSON.generate(save)
+    File.write('./data/people.json', save_teacher.to_s)
   end
 
   def create_student(name, age)
@@ -67,9 +75,15 @@ class App
     create_rental_person
     person_index = gets.chomp.to_i
     puts
-    print 'Date: '
+    print 'Enter a date: e.g 2022/09/28 '
     date = gets.chomp
     @rentals << Rental.new(date, @books[book_index], @people[person_index])
+    save = []
+    @rentals.each do |rent|
+      save << { date: rent.date, book: rent.book.title, person: rent.person.name }
+    end
+    save_rental = JSON.generate(save)
+    File.write('./data/rentals.json', save_rental)
     puts 'Rental created successfully'
   end
 
@@ -133,6 +147,12 @@ class App
     author = gets.chomp
 
     @books << Book.new(title, author)
+    save = []
+    @books.each do |bookk|
+      save << { title: bookk.title, author: bookk.author }
+      save_book = JSON.generate(save)
+      File.write('./data/books.json', save_book.to_s)
+    end
     puts 'Book created successfully'
   end
 end
