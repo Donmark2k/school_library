@@ -5,6 +5,8 @@ require_relative 'rental'
 require_relative 'teacher'
 require_relative 'student'
 require_relative 'classroom'
+require_relative './data/loader'
+
 require 'json'
 
 
@@ -47,8 +49,8 @@ class App
       save << {id:person.id, name:person.name,  age:person.age}
       save_teacher = JSON.generate(save)
       File.write('./data/people.json', save_teacher.to_s)
-      puts 'Student created successfully'
     end
+    puts 'Student created successfully'
   end
 
   def create_teacher(name, age)
@@ -127,10 +129,19 @@ class App
   end
 
   def list_books
-    if @books.empty?
+    # if @books.empty?
+    #   puts 'There are no books in the library'
+    # else
+    #   @books.each do |book|
+    #     puts "Title: #{book.title}, Author: #{book.author}".capitalize
+    #   end
+    # end
+    @loader = Loader.new
+    @loader.load_books
+    if @loader.books.empty?
       puts 'There are no books in the library'
     else
-      @books.each do |book|
+      @loader.books.each do |book|
         puts "Title: #{book.title}, Author: #{book.author}".capitalize
       end
     end
@@ -146,20 +157,28 @@ class App
     end
   end
 
+ 
   def create_book
     print 'Title: '
     title = gets.chomp
-
+  
     print 'Author: '
     author = gets.chomp
-
-    @books << Book.new(title, author)
-    save = []
-    @books.each do |bookk|
-      save << { title: bookk.title, author: bookk.author }
-      save_book = JSON.generate(save)
-      File.write('./data/books.json', save_book.to_s)
+  
+    # Read existing data from file, if any
+    books_data = []
+    if File.exist?('./data/books.json')
+      books_data = JSON.parse(File.read('./data/books.json'))
     end
+  
+    # Append new book to existing data
+    books_data << { title: title, author: author }
+  
+    # Write combined data back to file
+    File.write('./data/books.json', JSON.pretty_generate(books_data))
+  
+    @books << Book.new(title, author)
     puts 'Book created successfully'
   end
+  
 end
