@@ -124,12 +124,14 @@ class App
     puts
     print 'Enter a date: e.g 20/09/2023 '
     date = gets.chomp
-    book = @books[book_index]
+    @loader.load_books
+    book = @loader.books[book_index]
     if book.nil?
       puts "Invalid book index: #{book_index}"
       return
     end
-    person = @people[person_index]
+    @loader.load_people
+    person = @loader.people[person_index]
     if person.nil?
       puts "Invalid person index: #{person_index}"
       return
