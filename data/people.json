@@ -1,1 +1,30 @@
-[{"id":521,"name":"ikpa","age":"34"}]
+[
+  {
+    "id": 20,
+    "name": "okpe",
+    "age": "ofianya"
+  },
+  {
+    "id": 666,
+    "name": "the",
+    "age": "45",
+    "specialization": "43"
+  },
+  {
+    "id": 970,
+    "name": "ara",
+    "age": "34",
+    "specialization": "cmp"
+  },
+  {
+    "id": 889,
+    "name": "amaka",
+    "age": "25",
+    "classroom": "#<Classroom:0x0000026d8c71e930>"
+  },
+  {
+    "id": 398,
+    "name": "onyeka",
+    "age": "14"
+  }
+]

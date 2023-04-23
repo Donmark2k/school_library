@@ -45,27 +45,43 @@ class App
     student = Student.new(name, age, classroom,  parent_permission: parent_permission)
     @people << student
     save= []
-    @people.each do |person|
-      save << {id:person.id, name:person.name,  age:person.age}
-      save_teacher = JSON.generate(save)
-      File.write('./data/people.json', save_teacher.to_s)
+    if File.exist?('./data/people.json')
+      # Read existing data from file
+      file = File.read('./data/people.json')
+      save = JSON.parse(file)
     end
+    
+    # Append new teacher data to the array
+    save << { id: student.id, name: student.name, age: student.age }
+  
+    # Write the updated array to the file
+    File.write('./data/people.json', JSON.pretty_generate(save))
     puts 'Student created successfully'
   end
+
 
   def create_teacher(name, age)
     print 'Specialization: '
     specialization = gets.chomp
-    teacher = Teacher.new(name, age, specialization )
+    teacher = Teacher.new(name, age, specialization)
     @people << teacher
-    save= []
-    @people.each do |person|
-      save << {id:person.id, name:person.name, age:person.age}
-      save_teacher = JSON.generate(save)
-      File.write('./data/people.json', save_teacher.to_s)
-      puts 'Teacher created successfully'
+    save = []
+  
+    if File.exist?('./data/people.json')
+      # Read existing data from file
+      file = File.read('./data/people.json')
+      save = JSON.parse(file)
     end
+    
+    # Append new teacher data to the array
+    save << { id: teacher.id, name: teacher.name, age: teacher.age, specialization: teacher.specialization }
+  
+    # Write the updated array to the file
+    File.write('./data/people.json', JSON.generate(save))
+  
+    puts 'Teacher created successfully'
   end
+  
 
   def person_option
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
