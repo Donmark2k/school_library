@@ -8,6 +8,10 @@ class Teacher < Person
     @specialization = specialization
   end
 
+  def id=(value)
+    @id = value
+  end
+
   def can_use_services?
     true
   end
