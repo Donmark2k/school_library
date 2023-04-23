@@ -28,20 +28,7 @@ class Loader
   end
 
   # ========load people ========
-#   def load_people
-#     return unless File.exist?('./data/people.json')
 
-#     file = File.read('./data/people.json')
-#     data = JSON.parse(file)
-#     data.each do |person|
-#       @people <<
-#         if person['parent_permission']
-#           Student.new(person['age'], person['name'], parent_permission: person['parent_permission'])
-#         else
-#           Teacher.new(person['age'], person['specialization'], person['name'])
-#         end
-#     end
-#   end
 def load_people
     return unless File.exist?('./data/people.json')
   
@@ -61,9 +48,9 @@ def load_people
 
   # =======Load retals =========
   def load_rentals
-    return unless File.exist?('./rentals.json')
+    return unless File.exist?('./data/rentals.json')
 
-    file = File.read('./rentals.json')
+    file = File.read('./data/rentals.json')
     data = JSON.parse(file)
     data.each do |rental|
       @rentals << Rental.new(rental['date'], @people.select do |person|

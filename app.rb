@@ -93,16 +93,48 @@ class App
     person_type
   end
 
+  # def create_rental
+  #   @loader = Loader.new
+
+  #   create_rental_book
+  #   book_index = gets.chomp.to_i
+  #   puts
+  #   create_rental_person
+  #   person_index = gets.chomp.to_i
+  #   puts
+  #   print 'Enter a date: e.g 2022/09/28 '
+  #   date = gets.chomp
+  #   @rentals << Rental.new(date, @books[book_index], @people[person_index])
+  #   save = []
+  #   @rentals.each do |rent|
+  #     save << { date: rent.date, book: rent.book.title, person: rent.person.name }
+  #   end
+  #   save_rental = JSON.generate(save)
+  #   File.write('./data/rentals.json', save_rental)
+  #   puts 'Rental created successfully'
+  # end
   def create_rental
+    @loader = Loader.new
+  
     create_rental_book
     book_index = gets.chomp.to_i
     puts
     create_rental_person
     person_index = gets.chomp.to_i
     puts
-    print 'Enter a date: e.g 2022/09/28 '
+    print 'Enter a date: e.g 20/09/2023 '
     date = gets.chomp
-    @rentals << Rental.new(date, @books[book_index], @people[person_index])
+    book = @books[book_index]
+    if book.nil?
+      puts "Invalid book index: #{book_index}"
+      return
+    end
+    person = @people[person_index]
+    if person.nil?
+      puts "Invalid person index: #{person_index}"
+      return
+    end
+    @rentals << Rental.new(date, book, person)
     save = []
     @rentals.each do |rent|
       save << { date: rent.date, book: rent.book.title, person: rent.person.name }
@@ -111,26 +143,32 @@ class App
     File.write('./data/rentals.json', save_rental)
     puts 'Rental created successfully'
   end
+  
 
   def create_rental_book
-    if @books.empty?
+    @loader = Loader.new
+    @loader.load_books
+
+    if @loader.books.empty?
       puts 'There are no books in the library to rent'
       return
     end
     puts 'Select a book from the following list by number'
-    @books.each_with_index do |book, index|
+    @loader.books.each_with_index do |book, index|
       puts "#{index}) Title: '#{book.title}', Author: #{book.author}"
     end
   end
 
   def create_rental_person
+    @loader = Loader.new
+    @loader.load_people
     puts 'Select a person from the following list by number (not id)'
-    if @people.empty?
+    if @loader.people.empty?
       puts 'There are no people in the library'
       return
     end
 
-    @people.each_with_index do |person, index|
+    @loader.people.each_with_index do |person, index|
       puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
   end
@@ -156,18 +194,7 @@ class App
     end
   end
 
-  # def list_people
-  #   @loader = Loader.new
-  #   @loader.load_people
-
-  #   if @loader.people.empty?
-  #     puts 'There are no people in the library'
-  #   else
-  #     @loader.people.each do |person|
-  #       puts "[#{person.class}] Name: #{person.name}, Age: #{person.age}, ID: #{person.id}"
-  #     end
-  #   end
-  # end
+ 
   def list_people
     @loader = Loader.new
     @loader.load_people
