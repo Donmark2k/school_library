@@ -93,26 +93,7 @@ class App
     person_type
   end
 
-  # def create_rental
-  #   @loader = Loader.new
-
-  #   create_rental_book
-  #   book_index = gets.chomp.to_i
-  #   puts
-  #   create_rental_person
-  #   person_index = gets.chomp.to_i
-  #   puts
-  #   print 'Enter a date: e.g 2022/09/28 '
-  #   date = gets.chomp
-  #   @rentals << Rental.new(date, @books[book_index], @people[person_index])
-  #   save = []
-  #   @rentals.each do |rent|
-  #     save << { date: rent.date, book: rent.book.title, person: rent.person.name }
-  #   end
-  #   save_rental = JSON.generate(save)
-  #   File.write('./data/rentals.json', save_rental)
-  #   puts 'Rental created successfully'
-  # end
+  
   def create_rental
     @loader = Loader.new
   
@@ -138,11 +119,27 @@ class App
     end
     @rentals << Rental.new(date, book, person)
     save = []
-    @rentals.each do |rent|
-      save << { date: rent.date, book: rent.book.title, person: rent.person.name }
+
+
+    if File.exist?('./data/rentals.json')
+      # Read existing data from file
+      file = File.read('./data/rentals.json')
+      save = JSON.parse(file)
     end
-    save_rental = JSON.generate(save)
-    File.write('./data/rentals.json', save_rental)
+    
+    # Append new teacher data to the array
+    save << { id: person.id, name: person.name, book: book.title, Author: book.author }
+  
+    # Write the updated array to the file
+    File.write('./data/rentals.json', JSON.pretty_generate(save))
+  
+  
+    ######
+    # @rentals.each do |rent|
+    #   save << { date: rent.date, book: rent.book.title, person: rent.person.name }
+    # end
+    # save_rental = JSON.generate(save)
+    # File.write('./data/rentals.json', save_rental)
     puts 'Rental created successfully'
   end
   
