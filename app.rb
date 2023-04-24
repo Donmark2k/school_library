@@ -10,7 +10,6 @@ require_relative './data/loader'
 
 require 'json'
 
-
 class App
   def initialize
     @classrooms = []
@@ -112,7 +111,6 @@ class App
     # save = []
 
     save = JSON.parse(file)
-
 
     save << { id: person.id, name: person.name, book: book.title, Author: book.author }
 

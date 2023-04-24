@@ -14,7 +14,6 @@ class Loader
     @rentals = []
   end
 
-
   # ======== Load books=======
 
   def load_books
