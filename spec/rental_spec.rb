@@ -5,8 +5,8 @@ require './student'
 describe Rental do
   context 'create a rental' do
     book = Book.new 'Purple_Hibiscus', 'Chiamanda'
-    student = Student.new('Chukwuemeka', 48,  'ENG121', parent_permission: true)
-    rental = Rental.new( id,'01/04/2023', book, student)
+    student = Student.new('Chukwuemeka', 48, 'ENG121', parent_permission: true)
+    rental = Rental.new(id, '01/04/2023', book, student)
 
     it 'check the date' do
       rental.date.should eq '01/04/2023'

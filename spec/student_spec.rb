@@ -2,7 +2,7 @@ require './student'
 
 describe Student do
   context 'create a student' do
-    student = Student.new( 'Chukwuemeka', 48, 'ENG121', parent_permission: true)
+    student = Student.new('Chukwuemeka', 48, 'ENG121', parent_permission: true)
 
     it 'show name' do
       expect(student.name).to eq 'Chukwuemeka'

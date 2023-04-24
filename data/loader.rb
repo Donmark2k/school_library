@@ -29,9 +29,9 @@ class Loader
 
   # ========load people ========
 
-def load_people
+  def load_people
     return unless File.exist?('./data/people.json')
-  
+
     file = File.read('./data/people.json')
     data = JSON.parse(file)
     data.each do |person|

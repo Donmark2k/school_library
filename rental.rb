@@ -12,7 +12,4 @@ class Rental
     # @book.rentals << self
     # @person.rentals << self
   end
-  def id=(value)
-    @id = value
-  end
 end

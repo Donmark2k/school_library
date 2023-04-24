@@ -5,7 +5,7 @@ require './nameable'
 describe Decorator do
   before :each do
     @person = Person.new('chimamandaadiche', 27)
-    @person2 = Person.new( 'John', 27)
+    @person2 = Person.new('John', 27)
   end
 
   context 'CapitalizeDecorator' do

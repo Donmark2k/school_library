@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 require_relative 'person'
 require_relative 'decorator'
 require_relative 'book'
@@ -33,7 +34,6 @@ class App
     when '2'
       create_teacher(name, age)
     end
-
   end
 
   def create_student(name, age)
@@ -42,23 +42,19 @@ class App
     print 'Has parent permission? [Y/N]: '
     parent_permission = gets.chomp.downcase == 'y'
     classroom = Classroom.new(classroom_name)
-    student = Student.new(name, age, classroom,  parent_permission: parent_permission)
+    student = Student.new(name, age, classroom, parent_permission: parent_permission)
     @people << student
-    save= []
+    save = []
     if File.exist?('./data/people.json')
       # Read existing data from file
       file = File.read('./data/people.json')
       save = JSON.parse(file)
     end
-    
-    # Append new teacher data to the array
+
     save << { id: student.id, name: student.name, age: student.age }
-  
-    # Write the updated array to the file
     File.write('./data/people.json', JSON.pretty_generate(save))
     puts 'Student created successfully'
   end
-
 
   def create_teacher(name, age)
     print 'Specialization: '
@@ -66,22 +62,21 @@ class App
     teacher = Teacher.new(name, age, specialization)
     @people << teacher
     save = []
-  
+
     if File.exist?('./data/people.json')
       # Read existing data from file
       file = File.read('./data/people.json')
       save = JSON.parse(file)
     end
-    
+
     # Append new teacher data to the array
     save << { id: teacher.id, name: teacher.name, age: teacher.age, specialization: teacher.specialization }
-  
+
     # Write the updated array to the file
     File.write('./data/people.json', JSON.generate(save))
-  
+
     puts 'Teacher created successfully'
   end
-  
 
   def person_option
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
@@ -93,49 +88,36 @@ class App
     person_type
   end
 
-  
   def create_rental
     @loader = Loader.new
-  
+
     create_rental_book
     book_index = gets.chomp.to_i
     puts
     create_rental_person
     person_index = gets.chomp.to_i
-    puts
+
     print 'Enter a date: e.g 20/09/2023 '
     date = gets.chomp
     @loader.load_books
     book = @loader.books[book_index]
-    if book.nil?
-      puts "Invalid book index: #{book_index}"
-      return
-    end
+
     @loader.load_people
     person = @loader.people[person_index]
-    if person.nil?
-      puts "Invalid person index: #{person_index}"
-      return
-    end
+
     id = person.id
     @rentals << Rental.new(id, date, book, person)
-    save = []
+
+    file = File.read('./data/rentals.json')
+    # save = []
+
+    save = JSON.parse(file)
 
 
-    if File.exist?('./data/rentals.json')
-      # Read existing data from file
-      file = File.read('./data/rentals.json')
-      save = JSON.parse(file)
-    end
-    
-    # Append new teacher data to the array
     save << { id: person.id, name: person.name, book: book.title, Author: book.author }
-  
-    # Write the updated array to the file
+
     File.write('./data/rentals.json', JSON.pretty_generate(save))
-    puts 'Rental created successfully'
   end
-  
 
   def create_rental_book
     @loader = Loader.new
@@ -169,7 +151,7 @@ class App
     @loader = Loader.new
     @loader.load_rentals
     @loader.load_people
-     @loader.load_books
+    @loader.load_books
     print 'ID of person: '
     id = gets.chomp.to_i
     puts 'Rentals:'
@@ -198,47 +180,43 @@ class App
     end
   end
 
- 
   def list_people
     @loader = Loader.new
     @loader.load_people
-  
+
     if @loader.people.empty?
       puts 'There are no people in the library'
     else
       @loader.people.each do |person|
         if person.is_a?(Teacher) && person.specialization
-          puts "[Teacher] ID: #{person.id}, Name: #{person.name}, Age: #{person.age},  Specialization: #{person.specialization}"
+          puts "[Teacher] ID: #{person.id}, Name: #{person.name}, Age: #{person.age},
+           Specialization: #{person.specialization}"
         else
           puts "[Student] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
         end
       end
     end
   end
-  
 
- 
   def create_book
     print 'Title: '
     title = gets.chomp
-  
+
     print 'Author: '
     author = gets.chomp
-  
+
     # Read existing data from file, if any
     books_data = []
-    if File.exist?('./data/books.json')
-      books_data = JSON.parse(File.read('./data/books.json'))
-    end
-  
+    books_data = JSON.parse(File.read('./data/books.json')) if File.exist?('./data/books.json')
+
     # Append new book to existing data
     books_data << { title: title, author: author }
-  
+
     # Write combined data back to file
     File.write('./data/books.json', JSON.pretty_generate(books_data))
-  
+
     @books << Book.new(title, author)
     puts 'Book created successfully'
   end
-  
 end
+# rubocop:enable Metrics/ClassLength

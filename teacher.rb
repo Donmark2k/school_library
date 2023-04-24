@@ -8,9 +8,7 @@ class Teacher < Person
     @specialization = specialization
   end
 
-  def id=(value)
-    @id = value
-  end
+  attr_writer :id
 
   def can_use_services?
     true
