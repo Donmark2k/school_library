@@ -1,8 +1,8 @@
-# require './decorate'
+# require './decorator'
 # require './person'
 # require './nameable'
 
-# describe BaseDecorator do
+# describe Decorator do
 #   before :each do
 #     @person = Person.new(27, 'chimamandaadiche')
 #     @person2 = Person.new(27, 'John')
