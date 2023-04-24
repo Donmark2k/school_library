@@ -5,7 +5,7 @@ require_relative '../rental'
 require 'json'
 
 class Loader
-  attr_accessor :books, :people
+  attr_accessor :books, :people, :rentals
 
   def initialize
     super()
@@ -53,11 +53,7 @@ def load_people
     file = File.read('./data/rentals.json')
     data = JSON.parse(file)
     data.each do |rental|
-      @rentals << Rental.new(rental['date'], @people.select do |person|
-                                               person.name == rental['person']
-                                             end.first, @books.select do |book|
-                                                          book.title == rental['book']
-                                                        end.first)
+      @rentals << Rental.new(rental['id'], rental['name'], rental['book'], rental['author'])
     end
   end
 end

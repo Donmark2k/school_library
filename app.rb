@@ -117,7 +117,8 @@ class App
       puts "Invalid person index: #{person_index}"
       return
     end
-    @rentals << Rental.new(date, book, person)
+    id = person.id
+    @rentals << Rental.new(id, date, book, person)
     save = []
 
 
@@ -132,14 +133,6 @@ class App
   
     # Write the updated array to the file
     File.write('./data/rentals.json', JSON.pretty_generate(save))
-  
-  
-    ######
-    # @rentals.each do |rent|
-    #   save << { date: rent.date, book: rent.book.title, person: rent.person.name }
-    # end
-    # save_rental = JSON.generate(save)
-    # File.write('./data/rentals.json', save_rental)
     puts 'Rental created successfully'
   end
   
@@ -173,11 +166,23 @@ class App
   end
 
   def list_rentals_for_person_id
+    @loader = Loader.new
+    @loader.load_rentals
+    @loader.load_people
+     @loader.load_books
     print 'ID of person: '
     id = gets.chomp.to_i
     puts 'Rentals:'
-    @rentals.each do |rental|
-      puts "Date: #{rental.date}, Book Title '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
+    # @loader.rentals.each do |rental|
+    #   if rental.id.to_i == id
+    #     puts " Name: '#{rental.name}' Book Title '#{rental.book}' by #{rental.author}"
+    #   end
+    # end
+    rentals_data = JSON.parse(File.read('./data/rentals.json'))
+    rentals_data.each do |rental|
+      if rental['id'] == id
+        puts " ID: '#{rental['id']}',Name: '#{rental['name']}' Book Title '#{rental['book']}' by #{rental['Author']}"
+      end
     end
   end
 
