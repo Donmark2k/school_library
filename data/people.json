@@ -1,0 +1,24 @@
+[
+  {
+    "id": 535,
+    "name": "okpe",
+    "age": "28"
+  },
+  {
+    "id": 501,
+    "name": "adams agebe",
+    "age": "25",
+    "specialization": "mth"
+  },
+  {
+    "id": 734,
+    "name": "amaka",
+    "age": "25",
+    "specialization": "bank"
+  },
+  {
+    "id": 778,
+    "name": "amaka ezeoke",
+    "age": "24"
+  }
+]
